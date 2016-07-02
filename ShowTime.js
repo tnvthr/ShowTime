@@ -2,7 +2,7 @@ var nd = new Date();
 var menu = null;
 var h = nd.getHours();
 var m = nd.getMinutes();
-var s = nd.getSeconds()-7;
+var s = nd.getSeconds()-8;
 var klang = readFile(sdcard+"/Woods/ShowTime/Lang/ko");
 var vs = readFile(sdcard+"/Woods/ShowTime/Versions/Versions");
 var ctx = com.mojang.minecraftpe.MainActivity.currentMainActivity.get();
@@ -25,14 +25,16 @@ function selectLevelHook(){newLellel();openMenu();}
 function versions(){var vs = readFile(sdcard+"/Woods/ShowTime/Versions/Versions"); try{
 	if((vs.split("\n")[1])=="1.0"){download(sdcard+"/Woods/ShowTime/Versions/Versions","https://www.dropbox.com/s/p4fsbevhrywf7rb/Versions.txt?dl=1","Woods/ShowTime/Versions","Versions");}else{}}catch(e){}}
 function koLange(){try{var klang = readFile(sdcard+"/Woods/ShowTime/Lang/ko"); var vs = readFile(sdcard+"/Woods/ShowTime/Versions/Versions");
-	if(getNetwork()=="wifi"){cm((klang.split("ko.lang:")[1]));cm(" 현재버전: 1.0 /"+(klang.split("ko.lang:")[3])+(vs.split("\n")[1]))
-	}else if(getNetwork()=="mobile"){cm((klang.split("ko.lang:")[2]));cm("현재버전: 1.0 / "+(klang.split("ko.lang:")[3])+(vs.split("\n")[1]))}else if(getNetwork()=="offline"){
-		saveFile(sdcard+"/Woods/ShowTime/Lang/ko","Versions_1.0\nko_KR\nko.lang: Wi-fi가 켜져 있습니다.\nko.lang: 데이터 네트워크가 켜져 있습니다.\nko.lang: 최신버전: \nko.lang: 다운로드에 실패하였습니다.\nko.lang: 다음 업데이트를 기다려 주세요.", false);
-		saveFile(sdcard+"/Woods/ShowTime/Versions/Versions", "\n1.0", false);
+	if(getNetwork()=="wifi"){cm((klang.split("ko.lang:")[1]));cm(" 현재버전: 1.0"+(klang.split("ko.lang:")[3])+" /"+(vs.split("\n")[1]))
+	}else if(getNetwork()=="mobile"){cm((klang.split("ko.lang:")[2]));cm(" 현재버전: 1.0"+(klang.split("ko.lang:")[3])+" /"+(vs.split("\n")[1]))}else if(getNetwork()=="offline"){
+		cm(" 현재버전: 1.0"+(klang.split("ko.lang:")[3])+(klang.split("ko.lang:")[4]));
+		/*saveFile(sdcard+"/Woods/ShowTime/Lang/ko","Versions_1.0\nko_KR\nko.lang: Wi-fi가 켜져 있습니다.\nko.lang: 데이터 네트워크가 켜져 있습니다.\nko.lang: 최신버전: \nko.lang: 다운로드에 실패하였습니다.\nko.lang: 다음 업데이트를 기다려 주세요.", false);
+		saveFile(sdcard+"/Woods/ShowTime/Versions/Versions", "\n1.0", false);*/
 	}}catch(e){
-	saveFile(sdcard+"/Woods/ShowTime/Lang/ko","Versions_1.0\nko_KR\nko.lang: Wi-fi가 켜져 있습니다.\nko.lang: 데이터 네트워크가 켜져 있습니다.\nko.lang: 최신버전: \nko.lang: 다운로드에 실패하였습니다.\nko.lang: 다음 업데이트를 기다려 주세요.", false);
-	saveFile(sdcard+"/Woods/ShowTime/Versions/Versions", "\n1.0", false); koLange2(); cm(" 데이터 생성완료!")}}
-function koLange2(){var klang = readFile(sdcard+"/Woods/ShowTime/Lang/ko"); if(getNetwork()=="wifi"){cm((klang.split("ko.lang:")[1]))}else if(getNetwork()=="mobile"){cm((klang.split("ko.lang:")[2]))}}
+	saveFile(sdcard+"/Woods/ShowTime/Lang/ko","Versions_1.0\nko_KR\nko.lang: Wi-fi가 켜져 있습니다.\nko.lang: 데이터 네트워크가 켜져 있습니다.\nko.lang: 최신버전: \nko.lang: \"최신버전을 보실려면 인터넷 연결후 다시 접속해 주세요.\"\nko.lang: 다음 업데이트를 기다려 주세요.", false);
+	saveFile(sdcard+"/Woods/ShowTime/Versions/Versions", "\n1.0", false); koLange2(); cm(" 데이터 생성완료!");}}
+function koLange2(){var klang = readFile(sdcard+"/Woods/ShowTime/Lang/ko"); if(getNetwork()=="wifi"){cm((klang.split("ko.lang:")[1]))}else if(getNetwork()=="mobile"){cm((klang.split("ko.lang:")[2]))}else if(getNetwork()=="offline"){
+		cm(" 현재버전: 1.0"+(klang.split("ko.lang:")[3])+(klang.split("ko.lang:")[4]));}}
 function modTick(){s+=0.05; if(Math.round(s)>=60){m++; s=0; clopenMenu();}if(m==60){m=0; h++; clopenMenu();}}
 function leaveGame(){closeMenu();}
 function openMenu(){
